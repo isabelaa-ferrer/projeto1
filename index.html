@@ -299,25 +299,25 @@ print('teste')
     <script>
         // CONFIGURAÇÃO DO FIREBASE
         // IMPORTANTE: Substitua pela sua configuração do Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDcfVZsPScJwY-COE1xeKNU08BnnqV5rm4",
-  authDomain: "projeto-mobileii.firebaseapp.com",
-  projectId: "projeto-mobileii",
-  storageBucket: "projeto-mobileii.firebasestorage.app",
-  messagingSenderId: "879719400647",
-  appId: "1:879719400647:web:531f62977090e3e64deae2"
-};
+let firebaseApp;
 
-        // Inicializar Firebase
-        let db;
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-            console.log('Firebase inicializado com sucesso');
-        } catch (error) {
-            console.error('Erro ao inicializar Firebase:', error);
-            showStatus('Erro: Configure o Firebase primeiro', 'error');
-        }
+async function initFirebase() {
+  try {
+    // Faz a requisição para a rota criada no Vercel
+    const response = await fetch('/api/firebaseConfig');
+    const firebaseConfig = await response.json();
+
+    // Inicializa o Firebase com as configs recebidas
+    firebaseApp = firebase.initializeApp(firebaseConfig);
+
+    console.log("🔥 Firebase inicializado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao inicializar Firebase:", error);
+  }
+}
+
+// Chama a função logo que a página carrega
+initFirebase();
 
         // Inicializar o mapa
         const map = L.map('map').setView([-23.5505, -46.6333], 10); // São Paulo como centro inicial
