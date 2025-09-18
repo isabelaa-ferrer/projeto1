@@ -467,5 +467,32 @@ initFirebase();
             console.log('Mapa carregado com sucesso');
         });
 </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script>
+let firebaseApp;
+
+async function initFirebase() {
+try {
+// Busca a configuração segura da API do Vercel
+const response = await fetch('/api/firebaseConfig');
+const firebaseConfig = await response.json();
+
+// Inicializa o Firebase com as configs recebidas
+firebaseApp = firebase.initializeApp(firebaseConfig);
+
+console.log("🔥 Firebase inicializado com sucesso!");
+
+// Mensagem opcional para entregar
+alert("🔥 Firebase gravado com sucesso!");
+
+} catch (error) {
+console.error("Erro ao inicializar Firebase:", error);
+alert("❌ Erro ao inicializar Firebase. Veja o console.");
+}
+}
+
+// Chama a função assim que a página carregar
+initFirebase();
+</script>
 </body>
 </html>
