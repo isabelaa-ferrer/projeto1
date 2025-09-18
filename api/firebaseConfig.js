@@ -16,22 +16,3 @@ res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 res.status(200).json(firebaseConfig);
 };
 
-let firebaseApp;
-
-async function initFirebase() {
-  try {
-    // Faz a requisição para a rota criada no Vercel
-    const response = await fetch('/api/firebaseConfig');
-    const firebaseConfig = await response.json();
-
-    // Inicializa o Firebase com as configs recebidas
-    firebaseApp = firebase.initializeApp(firebaseConfig);
-
-    console.log("🔥 Firebase inicializado com sucesso!");
-  } catch (error) {
-    console.error("Erro ao inicializar Firebase:", error);
-  }
-}
-
-// Chama a função logo que a página carrega
-initFirebase();
