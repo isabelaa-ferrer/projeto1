@@ -299,25 +299,7 @@ print('teste')
     <script>
         // CONFIGURAÇÃO DO FIREBASE
         // IMPORTANTE: Substitua pela sua configuração do Firebase
-    let firebaseApp;
 
-async function initFirebase() {
-try {
-// Faz a requisição para a rota criada no Vercel
-const response = await fetch('/api/firebaseConfig');
-const firebaseConfig = await response.json();
-
-// Inicializa o Firebase com as configs recebidas
-firebaseApp = firebase.initializeApp(firebaseConfig);
-
-console.log("🔥 Firebase inicializado com sucesso!");
-} catch (error) {
-console.error("Erro ao inicializar Firebase:", error);
-}
-}
-
-// Chama a função logo que a página carrega
-initFirebase();
         // Inicializar o mapa
         const map = L.map('map').setView([-23.5505, -46.6333], 10); // São Paulo como centro inicial
 
