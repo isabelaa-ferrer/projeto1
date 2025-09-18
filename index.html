@@ -497,25 +497,32 @@ print('teste')
         map.whenReady(function() {
             console.log('Mapa carregado com sucesso');
         });
-    </script>
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script>
+  let firebaseApp;
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDcfVZsPScJwY-COE1xeKNU08BnnqV5rm4",
-    authDomain: "projeto-mobileii.firebaseapp.com",
-    projectId: "projeto-mobileii",
-    storageBucket: "projeto-mobileii.firebasestorage.app",
-    messagingSenderId: "879719400647",
-    appId: "1:879719400647:web:531f62977090e3e64deae2"
-  };
+  async function initFirebase() {
+    try {
+      // Busca a configuração segura da API do Vercel
+      const response = await fetch('/api/firebaseConfig');
+      const firebaseConfig = await response.json();
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+      // Inicializa o Firebase com as configs recebidas
+      firebaseApp = firebase.initializeApp(firebaseConfig);
+
+      console.log("🔥 Firebase inicializado com sucesso!");
+
+      // Mensagem opcional para entregar
+      alert("🔥 Firebase gravado com sucesso!");
+
+    } catch (error) {
+      console.error("Erro ao inicializar Firebase:", error);
+      alert("❌ Erro ao inicializar Firebase. Veja o console.");
+    }
+  }
+
+  // Chama a função assim que a página carregar
+  initFirebase();
 </script>
 </body>
 </html>
